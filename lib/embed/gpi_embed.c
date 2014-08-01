@@ -31,7 +31,8 @@
 
 #include <Python.h>
 #include "embed.h"
-
+#include <dlfcn.h>
+ 
 static PyThreadState *gtstate;
 
 static char progname[] = "cocotb";
@@ -58,8 +59,9 @@ void embed_init_python(void)
     // Don't initialise python if already running
     if (gtstate)
         return;
-
+    dlopen("libpython2.7.so", RTLD_LAZY | RTLD_GLOBAL);
     Py_SetProgramName(progname);
+
     Py_Initialize();                    /* Initialize the interpreter */
     PySys_SetArgvEx(1, argv, 0);
     PyEval_InitThreads();               /* Create (and acquire) the interpreter lock */
