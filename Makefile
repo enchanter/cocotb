@@ -39,7 +39,9 @@ clean:
 	-@rm -rf $(BUILD_DIR)
 	-@find . -name "obj" | xargs rm -rf
 	-@find . -name "*.pyc" | xargs rm -rf
-	-@find . -name "results.xml" | xargs rm -rf
+	-@find . -name "*results.xml" | xargs rm -rf
+	-@find . -name "runsim.do" | xargs rm -rf
+	-@find . -name "*stacktrace.vstf" | xargs rm -rf
 	$(MAKE) -C examples clean
 
 test: 
